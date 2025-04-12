@@ -1,6 +1,6 @@
 from django.urls import path
 
-from core.views import ShortUrlCreateView, redirect_to_original, ShortUrlStatsView
+from apps.core.views import ShortUrlCreateView, redirect_to_original, ShortUrlStatsView
 
 urlpatterns = [
     path('', ShortUrlCreateView.as_view(), name='short-url-create'),

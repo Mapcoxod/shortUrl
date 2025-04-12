@@ -4,7 +4,7 @@ from django.db import models
 
 
 class ShortUrl(models.Model):
-    original_url = models.URLField(verbose_name="ссылка")
+    original_url = models.URLField(verbose_name="ссылка", max_length=500)
     short_token = models.CharField(max_length=6, unique=True, verbose_name="токен короткой ссылки")
     created = models.DateTimeField(auto_now_add=True, verbose_name="дата создания")
     clicks = models.PositiveIntegerField(default=0, verbose_name="количество переходов")
