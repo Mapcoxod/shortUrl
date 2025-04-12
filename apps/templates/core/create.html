@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Сократить ссылку{% endblock %}
+
+{% block content %}
+
+<h1 class="text-center mb-4">Сократить ссылку</h1>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form method="post" class="d-flex gap-2">
+            {% csrf_token %}
+            {{ form.original_url|as_crispy_field }}
+            <button type="submit" class="btn btn-primary">Сократить</button>
+        </form>
+
+        {% if short_url %}
+            <div class="alert alert-success mt-4">
+                Ваша ссылка: 
+                <a href="/{{ short_url.short_token }}" target="_blank">
+                    {{ request.build_absolute_uri }}{{ short_url.short_token }}
+                </a>
+                Количество переходов: {{ short_url.clicks }}
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

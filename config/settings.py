@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Third-party apps
+    'crispy_forms',
+    'crispy_bootstrap5',
     # Local apps
     'apps.core'
 ]
@@ -60,7 +62,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            APPS_DIR / "apps/templates",
+            APPS_DIR / "templates",
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -73,6 +75,9 @@ TEMPLATES = [
         },
     },
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
