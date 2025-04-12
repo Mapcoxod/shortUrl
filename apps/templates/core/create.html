@@ -9,20 +9,39 @@
 
 <div class="card shadow-sm">
     <div class="card-body">
-        <form method="post" class="d-flex gap-2">
+
+        <form method="post" class="row g-2 align-items-center">
             {% csrf_token %}
-            {{ form.original_url|as_crispy_field }}
-            <button type="submit" class="btn btn-primary">Сократить</button>
+            <div class="col-md-9">
+                {{ form.original_url|as_crispy_field }}
+            </div>
+            <div class="col-md-3 d-grid">
+                <button type="submit" class="btn btn-primary mt-3">Сократить</button>
+            </div>
         </form>
 
+        <div class="d-grid mt-3">
+            <a href="{% url 'short-url-stats' %}" class="btn btn-outline-primary">
+                Статистика по всем ссылкам
+            </a>
+        </div>
+
         {% if short_url %}
-            <div class="alert alert-success mt-4">
-                Ваша ссылка: 
-                <a href="/{{ short_url.short_token }}" target="_blank">
-                    {{ request.build_absolute_uri }}{{ short_url.short_token }}
-                </a>
-                Количество переходов: {{ short_url.clicks }}
+            <div class="alert alert-success mt-4 d-flex justify-content-between align-items-center">
+                <span>
+                    Ваша ссылка: <a id="shortUrl" href="/{{ short_url.short_token }}" target="_blank">
+                    {{ request.build_absolute_uri }}{{ short_url.short_token }}</a>
+                </span>
+                <button onclick="copyToClipboard()" class="btn btn-sm btn-outline-success">Копировать</button>
             </div>
+
+            <script>
+                function copyToClipboard() {
+                    const short_url = document.getElementById('shortUrl').href;
+                    navigator.clipboard.writeText(short_url);
+                    alert('Ссылка скопирована!');
+                }
+            </script>
         {% endif %}
     </div>
 </div>
