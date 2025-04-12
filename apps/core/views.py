@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import FormView
+from django.views.generic import FormView, ListView
 from django.urls import reverse_lazy
 
 from apps.core.forms import ShortUrlForm
@@ -25,3 +25,10 @@ def redirect_to_original(request, short_token):
     short_url.clicks += 1
     short_url.save()
     return redirect(short_url.original_url)
+
+
+class ShortUrlStatsView(ListView):
+    model = ShortUrl
+    template_name = "core/stats.html"
+    context_object_name = "links"
+    
