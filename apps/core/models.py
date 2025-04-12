@@ -9,6 +9,11 @@ class ShortUrl(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name="дата создания")
     clicks = models.PositiveIntegerField(default=0, verbose_name="количество переходов")
 
+    class Meta:
+        ordering = ["-created"]
+        verbose_name = "сокращенная ссылка"
+        verbose_name_plural = "сокращенные ссылки"
+
     def save(self, *args, **kwargs):
         if not self.short_token:
             self.short_token = self.generate_token()
